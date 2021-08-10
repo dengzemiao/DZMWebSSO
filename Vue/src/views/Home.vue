@@ -53,18 +53,18 @@ export default {
         // 1、存储 token 保证接口使用，或保证 Vue 使用
         // localStorage.setItem('token', token || '')
         // 2、token 没值说明没有单点登录记录
-        if (!token) {
-          // 清空本地用户信息
-          // UserInfo.clear()
-          // 进入登录或者指定未登录页面
-          // this.$router.push('/')
-        } else {
+        if (token) {
           // 获取到单点登录 token 进行获取用户信息操作
           // axios.get(url,params).then(res => {
           //   console.log(res)
           // }).catch(err => {
           //   console.error(err)
           // })
+        } else {
+          // 清空本地用户信息
+          // UserInfo.clear()
+          // 进入登录或者指定未登录页面
+          // this.$router.push('/')
         }
       })
     }
