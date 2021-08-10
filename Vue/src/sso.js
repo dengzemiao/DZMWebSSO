@@ -3,6 +3,7 @@
 // 是否为测试环境（根据项目填写正式域名地址进行判断）
 var SSO_IS_DEBUG = !(window.location.host === 'hepai.video')
 // 单点登录服务器地址（Server 文件夹中 index.html 所存放的服务器地址)
+// index.html 放在了该域名的根目录(http://sso.dengzemiao.cn === http://sso.dengzemiao.cn/index.html)
 var SSO_URL = SSO_IS_DEBUG ? 'http://sso.dengzemiao.cn' : 'http://sso.dengzemiao.cn'
 
 // 公用对象
