@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSO-Test</title>
+  <style>
+    /* 配合样式 */
+    .content-view {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .content-view button {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <!-- UI -->
+  <div class="content-view">
+    <div>打开控制台，查看输出信息</div>
+    <button onclick="touchLogin()">登录</button>
+    <button onclick="touchLogout()">退出</button>
+    <button onclick="touchCheck()">检查</button>
+  </div>
+  <!-- JS -->
+  <script src="./sso.js"></script>
+  <!-- <script src="http://sso.dengzemiao.cn/axios.min.js"></script> -->
+  <script>
+    // 登录
+    function touchLogin () {
+      // 登录服务器获得到的 token
+      const token = 'SSO-TEST-TOKEN'
+      // 进行单点登录
+      SSO.login(token, (query) => {
+        // 输出返回信息 { sso: 1, type: 'login', token: 'xxx' }
+        console.log('SSO-Login', query)
+        // 进行登录成功处理
+      })
+    }
+    // 退出
+    function touchLogout () {
+      // 退出单点登录
+      SSO.logout((query) => {
+        // 输出返回信息 { sso: 1, type: 'logout', token: 'xxx' }
+        console.log('SSO-Logout', query)
+        // 进行退出成功处理
+      })
+    }
+    // 检查
+    function touchCheck () {
+      // 检查当前浏览器是否存在单点登录 token
+      SSO.check((query) => {
+        // 输出返回信息 { sso: 1, type: 'check', token: 'xxx' }
+        console.log('SSO-Check', query)
+        // 获取到单点登录 token 进行获取用户信息操作
+        // axios.get(url,params).then(res => {
+        //   console.log(res)
+        // }).catch(err => {
+        //   console.error(err)
+        // })
+      })
+    }
+  </script>
+</body>
+</html>
