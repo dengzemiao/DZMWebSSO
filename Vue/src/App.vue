@@ -44,8 +44,10 @@ export default {
         // UserInfo.clear()
         // 进入登录或者指定未登录页面
         this.$router.push('/')
-        // 显示渲染
-        this.isShow = true
+        // 显示渲染（延迟渲染是为了防止在当前页面刷新需要跳转到其他页面出现的闪动，保证效果流畅，如果还是出现页面闪动，添加时间即可）
+        setTimeout(() => {
+          this.isShow = true
+        }, 80)
       }
     })
   },
@@ -57,20 +59,28 @@ export default {
       //   const { code, data } = res
       //   if (code === 0) {
       //     // 更新用户信息
-      //     this.$store.commit('SET_AVATAR', data.avatar)
-      //     // 进入指定页面
+      //     this.$store.commit('SET_USER_INO', data)
+      //     // 进入登录成功页面
       //     this.$router.push('/home')
       //   } else {
-      //     // 进入指定页面
-      //     this.$router.push('/login')
+      //     // 清空本地用户信息
+      //     UserInfo.clear()
+      //     // 进入登录或者指定未登录页面
+      //     this.$router.push('/')
       //   }
-      //   // 显示渲染
-      //   this.isShow = true
+      //   // 显示渲染（延迟渲染是为了防止在当前页面刷新需要跳转到其他页面出现的闪动，保证效果流畅，如果还是出现页面闪动，添加时间即可）
+      //   setTimeout(() => {
+      //     this.isShow = true
+      //   }, 80)
       // }).catch((err) => {
-      //   // 进入指定页面
-      //   this.$router.push('/login')
-      //   // 显示渲染
-      //   this.isShow = true
+      //   // 清空本地用户信息
+      //   UserInfo.clear()
+      //   // 进入登录或者指定未登录页面
+      //   this.$router.push('/')
+      //   // 显示渲染（延迟渲染是为了防止在当前页面刷新需要跳转到其他页面出现的闪动，保证效果流畅，如果还是出现页面闪动，添加时间即可）
+      //   setTimeout(() => {
+      //     this.isShow = true
+      //   }, 80)
       // })
     }
   }

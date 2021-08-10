@@ -75,10 +75,14 @@
           // 获取到单点登录 token 进行获取用户信息操作
           // axios.get(url,params).then(res => {
           //   console.log(res)
+          //   // 1、获取成功存储用户数据进入指定登录成功页面
+          //   // 2、加载失败退出登录
           // }).catch(err => {
           //   console.error(err)
+          //   // 1、加载失败退出登录
           // })
         } else {
+          // 1、没有 token 退出登录
           // 清空本地用户信息
           // UserInfo.clear()
           // 进入登录或者指定未登录页面
