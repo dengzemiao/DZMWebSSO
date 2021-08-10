@@ -42,8 +42,16 @@ export default {
       } else {
         // 清空本地用户信息
         // UserInfo.clear()
+
         // 进入登录或者指定未登录页面
         this.$router.push('/')
+
+        // 进入登录或者指定未登录页面(如果有原生首页 与 Vue结合使用的，需要判断一下是否在登录页，在登录页则不需要进入首页)
+        // if (!window.location.href.includes('/login')) {
+        //   // 非登录页获取失败都进入首页
+        //   this.$router.push('/')
+        // }
+
         // 显示渲染（延迟渲染是为了防止在当前页面刷新需要跳转到其他页面出现的闪动，保证效果流畅，如果还是出现页面闪动，添加时间即可）
         setTimeout(() => {
           this.isShow = true
