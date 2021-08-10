@@ -37,7 +37,19 @@ export default {
       SSO.check((query) => {
         // 输出返回信息 { sso: 1, type: 'check', token: 'xxx' }
         console.log('SSO-Check', query)
-        // 获取到单点登录 token 进行获取用户信息操作
+        // 获取 token 值
+        const token = query.token
+        // 存储 token 保证接口使用
+        // Pub.ACCESS_TOKEN(token || '')
+        // token 没值说明没有单点登录记录
+        if (!token) {
+          // 清空本地用户信息
+          // UserInfo.clear()
+          // 进入登录或者指定未登录页面
+          this.$router.push('/')
+        } else {
+          // 获取到单点登录 token 进行获取用户信息操作
+        }
       })
     }
   }

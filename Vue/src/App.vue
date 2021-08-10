@@ -22,8 +22,13 @@ export default {
       const token = query.token
       // 存储 token 保证接口使用
       // Pub.ACCESS_TOKEN(token || '')
-      // token 没值说明没有单点登录记录，进入指定页面
-      if (!token) { this.$router.push('/') }
+      // token 没值说明没有单点登录记录
+      if (!token) {
+        // 清空本地用户信息
+        // UserInfo.clear()
+        // 进入登录或者指定未登录页面
+        this.$router.push('/')
+      }
       // 显示渲染
       this.isShow = true
     })

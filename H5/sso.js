@@ -1,5 +1,5 @@
 // 当前域名（当前项目的完整域名）
-// var SSO_URL_REDIRECT = `${window.location.protocol}//${window.location.host}`
+var SSO_URL_REDIRECT = `${window.location.protocol}//${window.location.host}`
 // 是否为测试环境（根据项目填写正式域名地址进行判断）
 var SSO_IS_DEBUG = !(window.location.host === 'hepai.video')
 // 单点登录服务器地址（Server 文件夹中 index.html 所存放的服务器地址)
@@ -22,6 +22,22 @@ var SSO = {
   check (callback) {
     // 连接
     this.connect(callback, 'check')
+  },
+  // 生成路由全链接，url 支持路由('/login')、全链接('http://xx', 'https://xx')
+  router (url) {
+    // 是否有值
+    if (url) {
+      // 是否为 http 地址
+      if (url.includes('http')) {
+        // 直接返回使用
+        return url
+      } else {
+        // 当前域名 + 路由地址
+        return `${SSO_URL_REDIRECT}${url}`
+      }
+    }
+    // 返回空
+    return ''
   },
   // 连接
   connect (callback, type, token) {
