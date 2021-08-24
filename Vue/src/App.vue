@@ -40,57 +40,54 @@ export default {
         // 显示渲染（可以放到获取用户信息回调中，成功或失败都得打开显示）
         this.isShow = true
       } else {
-        // 清空本地用户信息
-        // UserInfo.clear()
+        // 加载失败退出登录
+        // this.logout()
 
-        // 进入登录或者指定未登录页面
-        this.$router.push('/')
-
-        // 进入登录或者指定未登录页面(如果有原生首页 与 Vue结合使用的，需要判断一下是否在登录页，在登录页则不需要进入首页)
+        //（Vue 与 原生混合开发时）进入登录或者指定未登录页面(如果有原生首页 与 Vue结合使用的，需要判断一下是否在登录页，在登录页则不需要进入首页)
         // if (!window.location.href.includes('/login')) {
         //   // 非登录页获取失败都进入首页
         //   this.$router.push('/')
         // }
-
-        // 显示渲染（延迟渲染是为了防止在当前页面刷新需要跳转到其他页面出现的闪动，保证效果流畅，如果还是出现页面闪动，添加时间即可）
-        setTimeout(() => {
-          this.isShow = true
-        }, 80)
       }
     })
   },
   methods: {
     // 获取用户信息（案例）
-    userInfo () {
-      // 获取用户数据
-      // userInfo().then(res => {
-      //   const { code, data } = res
-      //   if (code === 0) {
-      //     // 更新用户信息
-      //     this.$store.commit('SET_USER_INO', data)
-      //     // 进入登录成功页面
-      //     this.$router.push('/home')
-      //   } else {
-      //     // 清空本地用户信息
-      //     UserInfo.clear()
-      //     // 进入登录或者指定未登录页面
-      //     this.$router.push('/')
-      //   }
-      //   // 显示渲染（延迟渲染是为了防止在当前页面刷新需要跳转到其他页面出现的闪动，保证效果流畅，如果还是出现页面闪动，添加时间即可）
-      //   setTimeout(() => {
-      //     this.isShow = true
-      //   }, 80)
-      // }).catch((err) => {
-      //   // 清空本地用户信息
-      //   UserInfo.clear()
-      //   // 进入登录或者指定未登录页面
-      //   this.$router.push('/')
-      //   // 显示渲染（延迟渲染是为了防止在当前页面刷新需要跳转到其他页面出现的闪动，保证效果流畅，如果还是出现页面闪动，添加时间即可）
-      //   setTimeout(() => {
-      //     this.isShow = true
-      //   }, 80)
-      // })
-    }
+    // userInfo () {
+    //   // 获取用户数据
+    //   userInfo().then(res => {
+    //     const { code, data } = res
+    //     if (code === 0) {
+    //       // 更新用户信息
+    //       this.$store.commit('SET_USER_INO', data)
+    //       // 如果是登录页，才需要跳转到指定页面（防止用户直接输入全地址访问，或者当前页面刷新被重新定位到其他页面）
+    //       if (window.location.href.includes('/login')) {
+    //         this.$router.push('/home')
+    //       }
+    //     } else {
+    //       // 加载失败退出登录
+    //       this.logout()
+    //       // 进入登录失败页面
+    //       this.$router.push('/login-error')
+    //     }
+    //   }).catch(() => {
+    //     // 加载失败退出登录
+    //     this.logout()
+    //     // 进入登录失败页面
+    //     this.$router.push('/login-error')
+    //   })
+    // },
+    // // 退出登录
+    // logout () {
+    //   // 清空本地用户信息
+    //   UserInfo.clear()
+    //   // 进入登录或者指定未登录页面
+    //   this.$router.push('/')
+    //   // 显示渲染（延迟渲染是为了防止在当前页面刷新需要跳转到其他页面出现的闪动，保证效果流畅，如果还是出现页面闪动，添加时间即可）
+    //   setTimeout(() => {
+    //     this.isShow = true
+    //   }, 80)
+    // }
   }
 }
 </script>
