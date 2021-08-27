@@ -17,6 +17,13 @@ export default {
   },
   created () {
     SSO.check((query) => {
+      // 判断当前是否支持 Storage 使用
+      if (!query.storage) {
+        // 不允许使用则打开显示
+        this.isShow = true
+        // 禁止往下走
+        return
+      }
       // 输出
       console.log('SSO-Check-App.vue', query)
       // 获取 token 值

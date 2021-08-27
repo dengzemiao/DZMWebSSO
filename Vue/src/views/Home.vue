@@ -17,7 +17,7 @@ export default {
       const token = 'SSO-TEST-TOKEN'
       // 进行单点登录
       SSO.login(token, (query) => {
-        // 输出返回信息 { sso: 1, type: 'login', token: 'xxx' }
+        // 输出返回信息 { sso: 1, storage: 1, type: 'logout', token: 'xxx' }
         console.log('SSO-Login', query)
         // 进行登录成功处理
 
@@ -30,7 +30,7 @@ export default {
     touchLogout () {
       // 退出单点登录
       SSO.logout((query) => {
-        // 输出返回信息 { sso: 1, type: 'logout', token: 'xxx' }
+        // 输出返回信息 { sso: 1, storage: 1, type: 'logout', token: 'xxx' }
         console.log('SSO-Logout', query)
         // 进行退出成功处理
 
@@ -43,7 +43,7 @@ export default {
     touchCheck () {
       // 检查当前浏览器是否存在单点登录 token
       SSO.check((query) => {
-        // 输出返回信息 { sso: 1, type: 'check', token: 'xxx' }
+        // 输出返回信息 { sso: 1, storage: 1, type: 'logout', token: 'xxx' }
         console.log('SSO-Check', query)
         // 进行检查成功处理
 
