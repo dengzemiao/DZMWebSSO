@@ -9,8 +9,22 @@
 <body>
   <!-- JS -->
   <script>
+    // 调用初始化
+    init()
     // 初始化
     function init () {
+      // 检查 Storage 使用权限
+      AuthStorage().then(function () {
+        // 允许使用
+        SendParams(1)
+      }).catch(function () {
+        // 不允许使用
+        SendParams(0)
+      })
+    }
+    // 发送数据
+    function SendParams (isAllowStorage) {
+      console.log(isAllowStorage)
       // 获取链接参数
       var query = GetQuery()
       // 获取 type
@@ -19,28 +33,40 @@
       var token = query.token || ''
       // 判断状态
       if (type === 'login') {
-        // 存储
-        localStorage.setItem('token', token)
+        // 检查访问权限
+        if (isAllowStorage) {
+          // 存储
+          localStorage.setItem('token', token)
+        } else {
+          // 清空
+          token = ''
+        }
       } else if (type === 'logout') {
-        // 移除
+        // 清空
         token = ''
-        localStorage.setItem('token', token)
-      } else { // check
-        // 获取
-        token = localStorage.getItem('token') || ''
+        // 检查访问权限 并 移除
+        if (isAllowStorage) { localStorage.setItem('token', token) }
+      } else {
+        // 清空（ type === 'check' ）
+        token = ''
+        // 检查访问权限 并 取出数据
+        if (isAllowStorage) { token = localStorage.getItem('token') || '' }
       }
       // 参数
       var params = {
+        // 是否为 SSO 的消息通知
         sso: 1,
+        // storage 是否允许使用
+        storage: isAllowStorage,
+        // 访问类型
         type: type,
+        // 缓存 token
         token: token
       }
       // 发送参数
       window.parent.postMessage(params, '*')
       // window.postMessage(params, '*')
     }
-    // 调用初始化
-    init()
     // 解析链接参数
     function GetQuery () {
       // 获取 url 中 '?' 符后的字串(包括问号)
@@ -63,6 +89,21 @@
       }
       // 返回
       return query
+    }
+    // 是否允许使用 Storage 存储数据
+    function AuthStorage () {
+      // 检查权限
+      return new Promise(function (resolve, reject) {
+        try {
+          // 隐身模式下不能赋值
+          localStorage['SSO-AUTH-STORAGE-CHECK'] = 'CHECK'
+          // 允许
+          resolve()
+        } catch {
+          // 不允许
+          reject()
+        }
+      })
     }
   </script>
 </body>
