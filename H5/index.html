@@ -63,6 +63,12 @@
       SSO.check((query) => {
         // 输出返回信息 { sso: 1, storage: 1, type: 'logout', token: 'xxx' }
         console.log('SSO-Check', query)
+        // 判断当前是否支持 Storage 使用
+        if (!query.storage) {
+          // 不支持说明无法取到 token，可以理解为不使用 SSO 进行登录操作即可
+          // 禁止往下走
+          return
+        }
         // 进行检查成功处理
 
         // -------------- 案例 --------------
